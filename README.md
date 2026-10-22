@@ -15,7 +15,7 @@
 
 ## 本地运行
 
-需要 Node.js 18 或更高版本。
+需要 Node.js 20 或更高版本（Railway 镜像使用 Node 20）。
 
 ```bash
 git clone https://github.com/NIU0216/forge-atoms.git
@@ -39,3 +39,8 @@ npm start
 - [技术说明](docs/TECHNICAL.md)
 - [用户手册](docs/USER_MANUAL.md)
 - [测试记录](docs/TEST_NOTES.md)
+
+## 部署到 Railway
+
+见 [docs/DEPLOY_RAILWAY.md](docs/DEPLOY_RAILWAY.md)。仓库根目录含 `Dockerfile` 与 `railway.toml`，可从 GitHub 一键部署。
+
