@@ -1,7 +1,7 @@
 {
   "name": "forge-atoms",
   "version": "1.0.0",
-  "description": "ForgeAtoms — AI multi-agent product workshop demo",
+  "description": "ForgeAtoms \u2014 AI multi-agent product workshop demo",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -9,7 +9,7 @@
     "dev": "node --watch src/server.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "archiver": "^7.0.1",

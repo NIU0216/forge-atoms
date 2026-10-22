@@ -6,6 +6,16 @@ const ejs = require('ejs');
 const fs = require('fs');
 
 require('./db'); // init schema
+try {
+  const { ensureDemoUser } = require('./seed');
+  const seedResult = ensureDemoUser();
+  if (seedResult.created) {
+    console.log('Auto-seeded demo account:', seedResult.email);
+  }
+} catch (err) {
+  console.warn('Demo seed skipped:', err && err.message ? err.message : err);
+}
+
 
 const { attachUser } = require('./middleware/auth');
 const authRoutes = require('./routes/auth');
