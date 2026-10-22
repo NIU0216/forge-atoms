@@ -1,55 +1,41 @@
 # ForgeAtoms
 
-Open-source demo inspired by [atoms.dev](https://atoms.dev/): turn an idea into a runnable deliverable with a multi-agent pipeline (research → product → architecture → engineering).
+像素风 AI 多智能体工坊。用一句话描述想法，智能体按「调研 → 产品 → 架构 → 工程」生成可预览、可导出的交付物。灵感来自 [atoms.dev](https://atoms.dev/)。
 
-**Features**
+## 功能
 
-- Register / login with SQLite persistence (sessions + hashed passwords)
-- Deliverables: landing page (web), PPTX (DeepSeek), playable mini-games (2048 / Snake / Tetris), pixel collage posters
-- Stardew-like pixel UI + 48-asset library (characters, trees, flora, fruit, food, scenes)
-- Race A/B variants, ZIP export, public source browser (redacts secrets)
-- Video / audio requests show a multimodal quota fallback page (no real multimodal call)
+- 注册、登录，会话与项目数据保存在本地 SQLite
+- 网站着陆页（预览、竞速 A/B、导出 ZIP）
+- DeepSeek 生成可下载 PPT
+- 可玩小游戏：2048、贪吃蛇、俄罗斯方块
+- 像素海报拼装
+- 素材库（人物、树木、花草、水果、美食、场景）
+- 视频 / 音频请求只显示多模态额度兜底文案，不调用真实多模态接口
+- 源码浏览自动脱敏，不展示密钥
 
-## Quick start
+## 本地运行
+
+需要 Node.js 18 或更高版本。
 
 ```bash
-git clone <your-repo-url> forge-atoms
+git clone https://github.com/NIU0216/forge-atoms.git
 cd forge-atoms
 cp .env.example .env
-# Edit .env — set DEEPSEEK_API_KEY (required for PPT / LLM theming)
+# 编辑 .env，填入 DEEPSEEK_API_KEY
 npm install
-npm run seed
 npm start
 ```
 
-Open http://127.0.0.1:3847/
+浏览器打开 http://127.0.0.1:3847/
 
-`npm run seed` creates a **demo-only** account for local testing. Credentials are printed by the seed script and live in `src/seed.js` (not for production).
+可选：`npm run seed` 会写入仅供本机演示的账号，凭据见 `src/seed.js`。
 
-Optional: `bash scripts/restart-all.sh` restarts the app and (if `cloudflared` is installed) a temporary public Quick Tunnel. The tunnel URL is written to `DEPLOY_URL.txt` (gitignored).
+## 安全
 
-## Environment
+不要提交真实的 `DEEPSEEK_API_KEY`。`.env`、SQLite 数据库和 `data/projects/` 里的生成产物都不应进入仓库。`.env.example` 只保留空占位符。
 
-| Variable | Purpose |
-|----------|---------|
-| `DEEPSEEK_API_KEY` | DeepSeek Chat API key (never commit this) |
-| `DEEPSEEK_BASE_URL` | Default `https://api.deepseek.com` |
-| `DEEPSEEK_MODEL` | Default `deepseek-chat` |
-| `SESSION_SECRET` | Express session secret — change in production |
-| `PORT` | Default `3847` |
+## 文档
 
-## Security
-
-- **Never commit** `.env`, API keys, SQLite databases, or generated `data/projects/*` outputs.
-- Code only reads `process.env.DEEPSEEK_API_KEY`; no key values belong in the repo.
-- Rotate any key that may have been pasted into a shell history or chat.
-
-## Docs
-
-- [Technical](docs/TECHNICAL.md)
-- [User manual](docs/USER_MANUAL.md)
-- [Test notes](docs/TEST_NOTES.md)
-
-## License
-
-Demo / educational use. Add a license of your choice before publishing widely.
+- [技术说明](docs/TECHNICAL.md)
+- [用户手册](docs/USER_MANUAL.md)
+- [测试记录](docs/TEST_NOTES.md)

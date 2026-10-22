@@ -23,12 +23,12 @@
 ## 3. 目录结构
 
 ```
-/workspace/forge-atoms/
+forge-atoms/
 ├── package.json
-├── DEPLOY_URL.txt          # 公网隧道 URL（部署时写入）
+├── .env.example            # 空占位符；不要把填好的 .env 提交入库
 ├── data/
-│   ├── forgeatoms.db       # SQLite 主库
-│   └── projects/<id>/<A|B>/  # 产物 HTML 落盘备份
+│   ├── forgeatoms.db       # SQLite 主库（运行时生成，不入库）
+│   └── projects/<id>/<A|B>/  # 产物落盘（不入库）
 ├── docs/
 │   ├── TECHNICAL.md
 │   ├── USER_MANUAL.md
@@ -121,38 +121,26 @@
 ## 7. 本地运行
 
 ```bash
-cd /workspace/forge-atoms
+cp .env.example .env   # 填入 DEEPSEEK_API_KEY，不要提交 .env
 npm install
-npm run seed          # 可选：写入 demo 账号
-npm start             # 监听 0.0.0.0:3847
+npm run seed           # 可选：写入本地 demo 账号
+npm start              # 监听 0.0.0.0:3847
 ```
 
 访问：http://127.0.0.1:3847/
 
 Demo 账号：运行 `npm run seed` 创建（邮箱/密码见 `src/seed.js`，仅本地演示，勿用于生产）
 
-环境变量（可选）：
+环境变量见 `.env.example`：
 
-- `PORT`（默认 3847）  
-- `SESSION_SECRET`
+- `DEEPSEEK_API_KEY`（PPT 与文案需要；仓库中只留空占位）
+- `DEEPSEEK_BASE_URL` / `DEEPSEEK_MODEL`
+- `SESSION_SECRET`（生产环境请自行更换）
+- `PORT`（默认 3847）
 
-## 8. 部署与公网访问
+## 8. 运行边界
 
-应用本身是单进程 Node 服务，数据在 `data/` 目录。公网访问通过反向隧道将本地 `3847` 暴露出去，例如：
-
-```bash
-# 终端 1
-cd /workspace/forge-atoms && npm start
-
-# 终端 2（任选其一可用的隧道）
-cloudflared tunnel --url http://127.0.0.1:3847
-# 或
-npx localtunnel --port 3847 --local-host 127.0.0.1
-```
-
-将得到的 `https://…` 写入 `DEPLOY_URL.txt`。
-
-> 注意：部分沙箱网络会拦截 Cloudflare Tunnel 所需的 7844/QUIC，或掐断 localtunnel 的长连接。若隧道失败，请在可出站的环境重跑上述命令，或把整个 `/workspace/forge-atoms` 拷到服务器用进程守护（systemd / pm2）常驻。
+应用是单进程 Node 服务，数据在 `data/`。本仓库只提供本地运行，不附带公网地址、隧道脚本或部署 URL。
 
 ## 9. 安全说明（Demo 级）
 
@@ -165,15 +153,4 @@ npx localtunnel --port 3847 --local-host 127.0.0.1
 
 - 接入真实 LLM（OpenAI / 本地 Ollama）替换 `pageGenerator`  
 - SSE/WebSocket 替代轮询  
-- 多页站点生成、自定义域名、GitHub 同步  
-
-## 11. 本沙箱公网隧道说明（Cursor Box）
-
-本环境将 `*.argotunnel.com` / `api.cloudflare.com` 解析到 `198.18.0.1`，且直连 `:7844` 会被丢弃。可用方案：
-
-1. 将 `198.18.0.1/32` 挂到 `lo`  
-2. 运行 `scripts/dual_fwd.py`（需 root 绑定 443）：把到 `198.18.0.1:443/7844` 的流量经 `127.0.0.1:8791` HTTP CONNECT 转到 **真实 Cloudflare Anycast IP**  
-3. 再启动 `cloudflared tunnel --url http://127.0.0.1:3847 --protocol http2`
-
-一键脚本：`bash scripts/restart-all.sh`  
-成功后 URL 写入 `DEPLOY_URL.txt`。
+- 多页站点生成、自定义域名、GitHub 同步
