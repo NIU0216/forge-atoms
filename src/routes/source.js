@@ -10,6 +10,7 @@ const ALLOW_EXT = new Set([
 ]);
 const BLOCK_NAMES = new Set([
   '.env', '.env.local', '.env.production', 'package-lock.json',
+  'DEPLOY_URL.txt', 'DEPLOY_URL',
 ]);
 const BLOCK_DIRS = new Set([
   'node_modules', '.git', 'data',

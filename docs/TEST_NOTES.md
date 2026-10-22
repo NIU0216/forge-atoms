@@ -5,7 +5,7 @@
 ## 环境
 
 - Node 服务：`http://127.0.0.1:3847`（进程 `node src/server.js`）
-- 公网：Cloudflare Quick Tunnel（见 `DEPLOY_URL.txt`）
+- 访问：仅本机。临时公网隧道地址已从仓库删除，不再记录。
 - 账号：seed 创建的本地演示账号（见 `src/seed.js` / `npm run seed` 输出；仅 Demo）
 
 ## 用例与结果
@@ -20,14 +20,12 @@
 | 6 | 竞速生成 | variants 含 A,B；并排对比可用 |
 | 7 | 选用 Variant B | `selected_variant=B` |
 | 8 | 导出 ZIP | 200，含 index.html / about.html / README.md |
-| 9 | 公网登录→构建→竞速→导出 | 全部通过（同本地） |
+| 9 | 登录→构建→竞速→导出（本机） | 通过 |
 
 ## 已知限制
 
-- 已接入 DeepSeek；网站在 API 失败时回退启发式；PPT 需 API。  
-- Cloudflare Quick Tunnel 无 SLA；本沙箱需配合本地 443/7844 CONNECT 转发才能连上 edge。  
-- Session 默认密钥仅适合 Demo。  
-- loca.lt / 直连 cloudflared（无转发）在本环境不可用。
+- 已接入 DeepSeek；网站在 API 失败时回退启发式；PPT 需 API。
+- Session 默认密钥仅适合 Demo。
 
 
 ## DeepSeek + PPT（追加）
@@ -78,6 +76,5 @@
 | 7 | 小游戏 / 多模态兜底文案未改 | 保留 |
 
 实测补充：
-- Public: https://admit-sent-willing-compete.trycloudflare.com
-- Sample image project: `346cf993-8349-4b4a-afd6-6fd47add369a` (农场丰收节海报) → ready + poster.png 34473 bytes
+- 样例图片项目在本机构建成功（农场丰收节海报）→ ready + poster.png 34473 bytes
 - Library / CSS / static PNG 均 200
