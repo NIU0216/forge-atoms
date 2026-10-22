@@ -1,0 +1,30 @@
+<div class="fa-page-head">
+  <div>
+    <h1>工作台</h1>
+    <p class="fa-muted">你好，<%= currentUser.name %> — 管理你的产品构想</p>
+  </div>
+  <a class="fa-btn" href="/projects/new">+ 新建项目</a>
+</div>
+
+<% if (!projects.length) { %>
+  <div class="fa-empty">
+    <h3>还没有项目</h3>
+    <p>描述一个想法，让 Iris / Emma / Bob / Alex 帮你构建。</p>
+    <a class="fa-btn" href="/projects/new">创建第一个项目</a>
+  </div>
+<% } else { %>
+  <div class="fa-project-list">
+    <% projects.forEach(function(p) { %>
+      <a class="fa-project-item" href="/projects/<%= p.id %>">
+        <div>
+          <h3><%= p.title %></h3>
+          <p><%= (p.idea || '').slice(0, 100) %><%= (p.idea || '').length > 100 ? '…' : '' %></p>
+        </div>
+        <div class="fa-project-meta">
+          <span class="fa-status fa-status-<%= p.status %>"><%= ({draft:'草稿',researching:'调研中',building:'构建中',ready:'已就绪'})[p.status] || p.status %></span>
+          <span class="fa-muted fa-xs"><%= p.updated_at %></span>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+<% } %>

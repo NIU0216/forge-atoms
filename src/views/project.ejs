@@ -1,0 +1,258 @@
+<div
+  class="fa-workspace"
+  x-data="workspace('<%= project.id %>', '<%= project.status %>', '<%= project.selected_variant || 'A' %>', <%= running ? 'true' : 'false' %>, <%= hasB ? 'true' : 'false' %>, '<%= project.deliverable || 'web' %>', <%= hasPptx ? 'true' : 'false' %>, <%= hasPoster ? 'true' : 'false' %>)"
+  x-init="init()"
+>
+  <div class="fa-page-head">
+    <div>
+      <a class="fa-muted fa-xs" href="/dashboard">← 工作台</a>
+      <h1><%= project.title %></h1>
+      <p class="fa-muted fa-clamp"><%= project.idea %></p>
+      <p class="fa-muted fa-xs">交付物：<%=
+        project.deliverable === 'ppt' ? 'PPT 演示文稿'
+        : project.deliverable === 'game' ? '小游戏'
+        : project.deliverable === 'image' ? '像素海报 / 图片'
+        : project.deliverable === 'multimodal' ? '视频 / 音频（需充值）'
+        : '网站着陆页'
+      %></p>
+    </div>
+    <div class="fa-head-actions">
+      <span class="fa-status" :class="'fa-status-' + status" x-text="statusLabel"></span>
+      <template x-if="status === 'draft' || status === 'ready'">
+        <button class="fa-btn" type="button" @click="startBuild()" :disabled="running">
+          <span x-text="status === 'ready' ? '重新构建' : '启动构建'"></span>
+        </button>
+      </template>
+      <template x-if="status === 'ready' && deliverable === 'web'">
+        <button class="fa-btn fa-btn-ghost" type="button" @click="startRace()" :disabled="running">竞速生成 A/B</button>
+      </template>
+      <template x-if="status === 'ready' && deliverable === 'ppt' && hasPptx">
+        <a class="fa-btn" :href="'/projects/' + id + '/download-pptx'">下载 PPTX</a>
+      </template>
+      <template x-if="status === 'ready' && (deliverable === 'image' || (deliverable === 'ppt' && hasPoster))">
+        <a class="fa-btn fa-btn-ghost" :href="'/projects/' + id + '/download-poster'">下载海报 PNG</a>
+      </template>
+      <template x-if="status === 'ready'">
+        <a class="fa-btn fa-btn-ghost" :href="'/projects/' + id + '/export?variant=' + selected">导出 ZIP</a>
+      </template>
+      <form method="post" :action="'/projects/' + id + '/delete'" onsubmit="return confirm('确定删除该项目？')">
+        <button class="fa-linkbtn" type="submit">删除</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="fa-workspace-grid">
+    <section class="fa-panel">
+      <div class="fa-panel-head">
+        <h2>智能体时间线</h2>
+        <span class="fa-muted fa-xs" x-show="running">运行中…</span>
+      </div>
+      <div class="fa-timeline" id="timeline">
+        <template x-if="messages.length === 0 && !running">
+          <div class="fa-empty-sm">点击「启动构建」，Iris / Emma / Bob / Alex 将依次调用 DeepSeek 输出结果。</div>
+        </template>
+        <template x-for="m in messages" :key="m.id">
+          <article class="fa-msg">
+            <div class="fa-msg-avatar" x-text="agentEmoji(m.agent_key)"></div>
+            <div class="fa-msg-body">
+              <div class="fa-msg-meta">
+                <strong x-text="m.agent_name"></strong>
+                <span class="fa-muted" x-text="m.agent_role"></span>
+              </div>
+              <pre class="fa-msg-content" x-text="m.content"></pre>
+            </div>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <section class="fa-panel">
+      <div class="fa-panel-head">
+        <h2 x-text="deliverable === 'ppt' ? '大纲预览' : (deliverable === 'image' ? '海报预览' : (deliverable === 'multimodal' ? '多模态结果' : '预览'))"></h2>
+        <div class="fa-variant-tabs" x-show="status === 'ready' && deliverable === 'web'">
+          <button type="button" class="fa-tab" :class="{ active: previewVariant === 'A' }" @click="previewVariant = 'A'">A</button>
+          <button type="button" class="fa-tab" :class="{ active: previewVariant === 'B' }" @click="previewVariant = 'B'" x-show="hasB">B</button>
+        </div>
+      </div>
+
+      <!-- PPT outline cards -->
+      <template x-if="deliverable === 'ppt' && status === 'ready' && outline && outline.slides">
+        <div class="fa-outline">
+          <div class="fa-outline-hero">
+            <h3 x-text="outline.title"></h3>
+            <p class="fa-muted" x-text="outline.subtitle || ''"></p>
+            <a class="fa-btn fa-btn-sm" style="margin-top:.75rem" :href="'/projects/' + id + '/download-pptx'" x-show="hasPptx">下载完整 PPTX</a>
+          </div>
+          <div class="fa-slide-cards">
+            <template x-for="(s, i) in outline.slides" :key="i">
+              <article class="fa-slide-card">
+                <div class="fa-slide-num" x-text="(i + 1)"></div>
+                <h4 x-text="s.title"></h4>
+                <ul>
+                  <template x-for="(b, j) in (s.bullets || [])" :key="j">
+                    <li x-text="b"></li>
+                  </template>
+                </ul>
+              </article>
+            </template>
+          </div>
+        </div>
+      </template>
+
+      <template x-if="deliverable === 'image' && status === 'ready'">
+        <div class="fa-outline">
+          <div class="fa-outline-hero">
+            <h3>像素素材拼贴海报</h3>
+            <p class="fa-muted">主题素材已从素材库匹配并排版，可下载 PNG 或导出 ZIP。</p>
+            <a class="fa-btn fa-btn-sm" style="margin-top:.75rem" :href="'/projects/' + id + '/download-poster'" x-show="hasPoster">下载 poster.png</a>
+          </div>
+          <img class="fa-poster-preview" :src="'/projects/' + id + '/download-poster?inline=1&t=' + Date.now()" alt="poster" x-show="hasPoster"/>
+          <iframe class="fa-preview" style="margin-top:12px;min-height:200px" :src="previewUrl" title="image-preview" x-show="!hasPoster"></iframe>
+        </div>
+      </template>
+
+      <template x-if="deliverable === 'multimodal' && status === 'ready'">
+        <div class="fa-outline">
+          <div class="fa-outline-hero" style="border-color:rgba(255,120,120,.4);background:rgba(80,20,20,.35)">
+            <h3>多模态模型API额度用尽，请及时充值</h3>
+            <p class="fa-muted">当前 Demo 支持网站 / PPT / 小游戏；视频与音频生成需充值多模态额度后再试。</p>
+            <a class="fa-btn fa-btn-sm" style="margin-top:.75rem" :href="previewUrl" target="_blank" rel="noopener">打开兜底页</a>
+          </div>
+          <iframe class="fa-preview" style="margin-top:12px;min-height:280px" :src="previewUrl" title="multimodal-fallback"></iframe>
+        </div>
+      </template>
+
+      <template x-if="(deliverable === 'web' || deliverable === 'game') && status === 'ready'">
+        <div>
+          <iframe class="fa-preview" :src="previewUrl" title="preview"></iframe>
+          <div class="fa-preview-actions" x-show="hasB">
+            <button class="fa-btn fa-btn-sm" type="button" @click="selectVariant(previewVariant)" :disabled="selected === previewVariant">
+              <span x-text="selected === previewVariant ? '已选用 Variant ' + previewVariant : '选用此版本 (' + previewVariant + ')'"></span>
+            </button>
+            <span class="fa-muted fa-xs">当前选用：Variant <span x-text="selected"></span></span>
+          </div>
+        </div>
+      </template>
+
+      <template x-if="status !== 'ready'">
+        <div class="fa-preview-placeholder">
+          <p x-show="running" x-text="runningHint"></p>
+          <p x-show="!running" x-text="idleHint"></p>
+        </div>
+      </template>
+    </section>
+  </div>
+
+  <template x-if="hasB && status === 'ready' && deliverable === 'web'">
+    <section class="fa-panel fa-race" style="margin-top:1rem">
+      <div class="fa-panel-head"><h2>竞速对比</h2><span class="fa-muted fa-xs">并排查看 A / B</span></div>
+      <div class="fa-race-grid">
+        <div>
+          <div class="fa-race-label">Variant A <button class="fa-btn fa-btn-sm" type="button" @click="selectVariant('A')" :disabled="selected==='A'">选用 A</button></div>
+          <iframe class="fa-preview fa-preview-sm" :src="'/preview/' + id + '/A/'" title="A"></iframe>
+        </div>
+        <div>
+          <div class="fa-race-label">Variant B <button class="fa-btn fa-btn-sm" type="button" @click="selectVariant('B')" :disabled="selected==='B'">选用 B</button></div>
+          <iframe class="fa-preview fa-preview-sm" :src="'/preview/' + id + '/B/'" title="B"></iframe>
+        </div>
+      </div>
+    </section>
+  </template>
+</div>
+
+<script>
+function workspace(id, initialStatus, initialSelected, initialRunning, initialHasB, initialDeliverable, initialHasPptx, initialHasPoster) {
+  const labels = { draft: '草稿', researching: '调研中', building: '构建中', ready: '已就绪' };
+  const emojis = { iris: '🔍', emma: '🧭', bob: '🏗️', alex: '⚙️' };
+  return {
+    id,
+    status: initialStatus,
+    selected: initialSelected || 'A',
+    running: initialRunning,
+    hasB: initialHasB,
+    deliverable: initialDeliverable || 'web',
+    hasPptx: initialHasPptx,
+    hasPoster: initialHasPoster,
+    outline: <%- JSON.stringify(outline || null) %>,
+    messages: <%- JSON.stringify(messages) %>,
+    previewVariant: initialSelected || 'A',
+    pollTimer: null,
+    get statusLabel() { return labels[this.status] || this.status; },
+    get previewUrl() { return '/preview/' + this.id + '/' + this.previewVariant + '/'; },
+    get runningHint() {
+      if (this.deliverable === 'ppt') return 'DeepSeek 撰写 PPT，并按主题从像素素材库拼贴封面…';
+      if (this.deliverable === 'image') return '正在解析主题并从像素素材库拼贴海报…';
+      if (this.deliverable === 'game') return '正在生成可玩小游戏（主题可走 DeepSeek，玩法为本地模板）…';
+      if (this.deliverable === 'multimodal') return '正在检查多模态额度…';
+      return '智能体正在构建预览…';
+    },
+    get idleHint() {
+      if (this.deliverable === 'ppt') return '构建完成后将显示幻灯片大纲，并可下载 PPTX / 海报';
+      if (this.deliverable === 'image') return '构建完成后将显示像素拼贴海报预览';
+      if (this.deliverable === 'game') return '构建完成后可在预览中直接游玩（点击游戏区后用方向键）';
+      if (this.deliverable === 'multimodal') return '若为视频/音频需求，将显示额度不足提示';
+      return '构建完成后将在此显示着陆页预览';
+    },
+    agentEmoji(k) { return emojis[k] || '✦'; },
+    init() {
+      if (this.running || this.status === 'researching' || this.status === 'building') this.startPoll();
+    },
+    async startBuild() {
+      this.running = true;
+      this.messages = [];
+      this.hasB = false;
+      this.hasPptx = false;
+      this.hasPoster = false;
+      this.outline = null;
+      this.status = 'researching';
+      await fetch('/projects/' + this.id + '/build', { method: 'POST', headers: { 'Accept': 'application/json' } });
+      this.startPoll();
+    },
+    async startRace() {
+      this.running = true;
+      await fetch('/projects/' + this.id + '/race', { method: 'POST', headers: { 'Accept': 'application/json' } });
+      this.startPoll();
+    },
+    async selectVariant(v) {
+      const res = await fetch('/projects/' + this.id + '/select-variant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ variant: v }),
+      });
+      if (res.ok) {
+        this.selected = v;
+        this.previewVariant = v;
+      }
+    },
+    startPoll() {
+      if (this.pollTimer) clearInterval(this.pollTimer);
+      this.pollTimer = setInterval(() => this.poll(), 1200);
+      this.poll();
+    },
+    async poll() {
+      try {
+        const res = await fetch('/projects/' + this.id + '/status');
+        if (!res.ok) return;
+        const data = await res.json();
+        this.status = data.status;
+        this.running = data.running;
+        this.selected = data.selected_variant || 'A';
+        this.messages = data.messages || [];
+        this.hasB = (data.variants || []).includes('B');
+        this.deliverable = data.deliverable || this.deliverable;
+        this.hasPptx = !!data.hasPptx;
+        this.hasPoster = !!data.hasPoster;
+        if (data.outline) this.outline = data.outline;
+        if (!this.running && (this.status === 'ready' || this.status === 'draft')) {
+          clearInterval(this.pollTimer);
+          this.pollTimer = null;
+        }
+        this.$nextTick(() => {
+          const el = document.getElementById('timeline');
+          if (el) el.scrollTop = el.scrollHeight;
+        });
+      } catch (e) { /* ignore */ }
+    },
+  };
+}
+</script>

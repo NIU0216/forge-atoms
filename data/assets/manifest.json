@@ -1,0 +1,684 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-22T10:57:01.849Z",
+  "display_size": 128,
+  "items": [
+    {
+      "id": "char_farmer_m",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "农夫",
+        "farmer",
+        "男",
+        "农场",
+        "角色"
+      ],
+      "file": "characters/char_farmer_m.png",
+      "name": "农夫"
+    },
+    {
+      "id": "char_farmer_f",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "农妇",
+        "farmer",
+        "女",
+        "农场",
+        "角色"
+      ],
+      "file": "characters/char_farmer_f.png",
+      "name": "农妇"
+    },
+    {
+      "id": "char_kid",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "小孩",
+        "child",
+        "孩子",
+        "角色"
+      ],
+      "file": "characters/char_kid.png",
+      "name": "小孩"
+    },
+    {
+      "id": "char_merchant",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "商人",
+        "merchant",
+        "NPC",
+        "角色"
+      ],
+      "file": "characters/char_merchant.png",
+      "name": "商人"
+    },
+    {
+      "id": "char_fisher",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "渔夫",
+        "fisher",
+        "钓鱼",
+        "水",
+        "角色"
+      ],
+      "file": "characters/char_fisher.png",
+      "name": "渔夫"
+    },
+    {
+      "id": "char_witch",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "女巫",
+        "witch",
+        "魔法",
+        "角色",
+        "节日"
+      ],
+      "file": "characters/char_witch.png",
+      "name": "女巫"
+    },
+    {
+      "id": "char_chef",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "厨师",
+        "chef",
+        "美食",
+        "厨房",
+        "角色"
+      ],
+      "file": "characters/char_chef.png",
+      "name": "厨师"
+    },
+    {
+      "id": "char_miner",
+      "category": "characters",
+      "tags": [
+        "人物",
+        "矿工",
+        "miner",
+        "洞穴",
+        "角色"
+      ],
+      "file": "characters/char_miner.png",
+      "name": "矿工"
+    },
+    {
+      "id": "tree_oak_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "橡树",
+        "oak",
+        "森林",
+        "自然",
+        "户外",
+        "绿"
+      ],
+      "file": "trees/tree_oak_01.png",
+      "name": "橡树"
+    },
+    {
+      "id": "tree_pine_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "松树",
+        "pine",
+        "森林",
+        "自然",
+        "冬天",
+        "绿"
+      ],
+      "file": "trees/tree_pine_01.png",
+      "name": "松树"
+    },
+    {
+      "id": "tree_apple_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "苹果树",
+        "果树",
+        "水果",
+        "自然",
+        "农场"
+      ],
+      "file": "trees/tree_apple_01.png",
+      "name": "苹果树"
+    },
+    {
+      "id": "tree_cherry_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "樱花",
+        "cherry",
+        "春天",
+        "粉",
+        "自然",
+        "节日"
+      ],
+      "file": "trees/tree_cherry_01.png",
+      "name": "樱花树"
+    },
+    {
+      "id": "tree_palm_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "椰子",
+        "palm",
+        "海滩",
+        "夏天",
+        "自然"
+      ],
+      "file": "trees/tree_palm_01.png",
+      "name": "椰子树"
+    },
+    {
+      "id": "tree_willow_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "柳树",
+        "willow",
+        "水边",
+        "自然",
+        "绿"
+      ],
+      "file": "trees/tree_willow_01.png",
+      "name": "柳树"
+    },
+    {
+      "id": "tree_dead_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "枯树",
+        "秋天",
+        "冬天",
+        "自然",
+        "棕"
+      ],
+      "file": "trees/tree_dead_01.png",
+      "name": "枯树"
+    },
+    {
+      "id": "tree_maple_01",
+      "category": "trees",
+      "tags": [
+        "树木",
+        "枫树",
+        "maple",
+        "秋天",
+        "红",
+        "自然"
+      ],
+      "file": "trees/tree_maple_01.png",
+      "name": "枫树"
+    },
+    {
+      "id": "flora_tulip",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "郁金香",
+        "花",
+        "春天",
+        "粉",
+        "花园"
+      ],
+      "file": "flora/flora_tulip.png",
+      "name": "郁金香"
+    },
+    {
+      "id": "flora_sunflower",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "向日葵",
+        "花",
+        "夏天",
+        "黄",
+        "阳光"
+      ],
+      "file": "flora/flora_sunflower.png",
+      "name": "向日葵"
+    },
+    {
+      "id": "flora_rose",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "玫瑰",
+        "花",
+        "红",
+        "爱情",
+        "礼物"
+      ],
+      "file": "flora/flora_rose.png",
+      "name": "玫瑰"
+    },
+    {
+      "id": "flora_lavender",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "薰衣草",
+        "紫",
+        "田野",
+        "放松"
+      ],
+      "file": "flora/flora_lavender.png",
+      "name": "薰衣草"
+    },
+    {
+      "id": "flora_grass_tuft",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "草",
+        "grass",
+        "自然",
+        "户外",
+        "绿"
+      ],
+      "file": "flora/flora_grass_tuft.png",
+      "name": "草丛"
+    },
+    {
+      "id": "flora_mushroom",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "蘑菇",
+        "森林",
+        "食物",
+        "红"
+      ],
+      "file": "flora/flora_mushroom.png",
+      "name": "蘑菇"
+    },
+    {
+      "id": "flora_fern",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "蕨",
+        "fern",
+        "森林",
+        "绿",
+        "自然"
+      ],
+      "file": "flora/flora_fern.png",
+      "name": "蕨类"
+    },
+    {
+      "id": "flora_daisy",
+      "category": "flora",
+      "tags": [
+        "花草",
+        "雏菊",
+        "daisy",
+        "白",
+        "春天",
+        "花"
+      ],
+      "file": "flora/flora_daisy.png",
+      "name": "雏菊"
+    },
+    {
+      "id": "fruit_apple",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "苹果",
+        "apple",
+        "红",
+        "健康",
+        "零食"
+      ],
+      "file": "fruit/fruit_apple.png",
+      "name": "苹果"
+    },
+    {
+      "id": "fruit_orange",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "橙子",
+        "orange",
+        "橙",
+        "维生素",
+        "零食"
+      ],
+      "file": "fruit/fruit_orange.png",
+      "name": "橙子"
+    },
+    {
+      "id": "fruit_grape",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "葡萄",
+        "grape",
+        "紫",
+        "甜",
+        "酒"
+      ],
+      "file": "fruit/fruit_grape.png",
+      "name": "葡萄"
+    },
+    {
+      "id": "fruit_strawberry",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "草莓",
+        "strawberry",
+        "红",
+        "甜",
+        "夏天"
+      ],
+      "file": "fruit/fruit_strawberry.png",
+      "name": "草莓"
+    },
+    {
+      "id": "fruit_watermelon",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "西瓜",
+        "watermelon",
+        "夏天",
+        "绿",
+        "清凉"
+      ],
+      "file": "fruit/fruit_watermelon.png",
+      "name": "西瓜"
+    },
+    {
+      "id": "fruit_banana",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "香蕉",
+        "banana",
+        "黄",
+        "热带",
+        "零食"
+      ],
+      "file": "fruit/fruit_banana.png",
+      "name": "香蕉"
+    },
+    {
+      "id": "fruit_peach",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "桃子",
+        "peach",
+        "粉",
+        "夏天",
+        "甜"
+      ],
+      "file": "fruit/fruit_peach.png",
+      "name": "桃子"
+    },
+    {
+      "id": "fruit_blueberry",
+      "category": "fruit",
+      "tags": [
+        "水果",
+        "蓝莓",
+        "blueberry",
+        "蓝",
+        "浆果",
+        "健康"
+      ],
+      "file": "fruit/fruit_blueberry.png",
+      "name": "蓝莓"
+    },
+    {
+      "id": "food_bread",
+      "category": "food",
+      "tags": [
+        "美食",
+        "面包",
+        "bread",
+        "早餐",
+        "烘焙",
+        "小麦"
+      ],
+      "file": "food/food_bread.png",
+      "name": "面包"
+    },
+    {
+      "id": "food_pie",
+      "category": "food",
+      "tags": [
+        "美食",
+        "馅饼",
+        "pie",
+        "甜点",
+        "烘焙",
+        "节日"
+      ],
+      "file": "food/food_pie.png",
+      "name": "馅饼"
+    },
+    {
+      "id": "food_soup",
+      "category": "food",
+      "tags": [
+        "美食",
+        "汤",
+        "soup",
+        "热",
+        "晚餐",
+        "舒适"
+      ],
+      "file": "food/food_soup.png",
+      "name": "汤"
+    },
+    {
+      "id": "food_fish_dish",
+      "category": "food",
+      "tags": [
+        "美食",
+        "鱼",
+        "fish",
+        "海鲜",
+        "晚餐"
+      ],
+      "file": "food/food_fish_dish.png",
+      "name": "烤鱼"
+    },
+    {
+      "id": "food_salad",
+      "category": "food",
+      "tags": [
+        "美食",
+        "沙拉",
+        "salad",
+        "健康",
+        "蔬菜",
+        "绿"
+      ],
+      "file": "food/food_salad.png",
+      "name": "沙拉"
+    },
+    {
+      "id": "food_cake",
+      "category": "food",
+      "tags": [
+        "美食",
+        "蛋糕",
+        "cake",
+        "甜点",
+        "庆祝",
+        "生日",
+        "节日"
+      ],
+      "file": "food/food_cake.png",
+      "name": "蛋糕"
+    },
+    {
+      "id": "food_coffee",
+      "category": "food",
+      "tags": [
+        "美食",
+        "咖啡",
+        "coffee",
+        "热饮",
+        "早晨",
+        "提神"
+      ],
+      "file": "food/food_coffee.png",
+      "name": "咖啡"
+    },
+    {
+      "id": "food_rice_bowl",
+      "category": "food",
+      "tags": [
+        "美食",
+        "米饭",
+        "rice",
+        "中餐",
+        "主食",
+        "碗"
+      ],
+      "file": "food/food_rice_bowl.png",
+      "name": "饭碗"
+    },
+    {
+      "id": "scene_farm_morning",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "农场",
+        "早晨",
+        "田野",
+        "户外",
+        "天空",
+        "farm"
+      ],
+      "file": "scenes/scene_farm_morning.png",
+      "name": "晨曦农场"
+    },
+    {
+      "id": "scene_forest_path",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "森林",
+        "小路",
+        "自然",
+        "绿",
+        "户外",
+        "forest"
+      ],
+      "file": "scenes/scene_forest_path.png",
+      "name": "林间小径"
+    },
+    {
+      "id": "scene_lake",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "湖",
+        "水",
+        "湖畔",
+        "自然",
+        "蓝",
+        "平静"
+      ],
+      "file": "scenes/scene_lake.png",
+      "name": "湖畔"
+    },
+    {
+      "id": "scene_cottage",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "小屋",
+        "家",
+        "乡村",
+        "房子",
+        "温馨",
+        "cottage"
+      ],
+      "file": "scenes/scene_cottage.png",
+      "name": "乡村小屋"
+    },
+    {
+      "id": "scene_market",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "市集",
+        "市场",
+        "摊位",
+        "热闹",
+        "食物",
+        "market"
+      ],
+      "file": "scenes/scene_market.png",
+      "name": "市集"
+    },
+    {
+      "id": "scene_night_sky",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "夜晚",
+        "星空",
+        "月亮",
+        "安静",
+        "night"
+      ],
+      "file": "scenes/scene_night_sky.png",
+      "name": "星空夜晚"
+    },
+    {
+      "id": "scene_beach",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "沙滩",
+        "海",
+        "夏天",
+        "假期",
+        "蓝",
+        "beach"
+      ],
+      "file": "scenes/scene_beach.png",
+      "name": "沙滩"
+    },
+    {
+      "id": "scene_snow_farm",
+      "category": "scenes",
+      "tags": [
+        "场景",
+        "冬天",
+        "雪",
+        "农场",
+        "白",
+        "节日",
+        "winter"
+      ],
+      "file": "scenes/scene_snow_farm.png",
+      "name": "雪中农场"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+node_modules/
+data/*.db
+data/*.db-*
+data/projects/*
+!data/projects/.gitkeep
+.env
+.env.*
+!.env.example
+DEPLOY_URL.txt
+*.log
+.DS_Store
+SECRET_SCAN.txt

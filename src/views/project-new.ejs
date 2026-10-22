@@ -1,0 +1,24 @@
+<div class="fa-auth" style="max-width:640px">
+  <h1>新建项目</h1>
+  <p class="fa-muted">描述产品想法、演示文稿、小游戏或像素海报主题</p>
+  <% if (error) { %><div class="fa-alert"><%= error %></div><% } %>
+  <form method="post" action="/projects" class="fa-form">
+    <label>项目标题
+      <input type="text" name="title" required maxlength="80" value="<%= form.title || '' %>" placeholder="例如：2048小游戏 / 春晚回忆录 / 农场丰收海报"/>
+    </label>
+    <label>想法描述
+      <textarea name="idea" required rows="6" placeholder="例如：做一个可玩的贪吃蛇…&#10;或：生成春晚回忆录 PPT…&#10;或：画一张星露谷风农场丰收海报…"><%= form.idea || '' %></textarea>
+    </label>
+    <label>交付物类型
+      <select name="deliverable">
+        <option value="auto" <%= !form.deliverable || form.deliverable === 'auto' ? 'selected' : '' %>>自动识别</option>
+        <option value="web" <%= form.deliverable === 'web' ? 'selected' : '' %>>网站着陆页</option>
+        <option value="ppt" <%= form.deliverable === 'ppt' ? 'selected' : '' %>>PPT 演示文稿</option>
+        <option value="image" <%= form.deliverable === 'image' ? 'selected' : '' %>>像素海报 / 图片</option>
+        <option value="game" <%= form.deliverable === 'game' ? 'selected' : '' %>>小游戏</option>
+      </select>
+    </label>
+    <p class="fa-muted fa-xs">自动识别优先级：视频/音频 → 小游戏 → 图片/海报 → PPT → 网站。PPT 与图片会按主题从<strong>像素素材库</strong>拼贴。视频/音频显示额度用尽兜底。</p>
+    <button class="fa-btn fa-btn-block" type="submit">创建并进入工作区</button>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+<section class="fa-panel">
+  <div class="fa-panel-hd">
+    <h1>源代码（只读）</h1>
+    <p class="fa-muted"><%= notice %></p>
+  </div>
+  <div class="fa-source-layout">
+    <aside class="fa-source-tree">
+      <a class="fa-link" href="/source">全部文件</a>
+      <% Object.keys(groups).sort().forEach(function(g) { %>
+        <div class="fa-source-group">
+          <div class="fa-source-group-title"><%= g %></div>
+          <% groups[g].forEach(function(f) { %>
+            <a class="fa-source-file<%= file === f.path ? ' is-active' : '' %>" href="/source/view?f=<%= encodeURIComponent(f.path) %>"><%= f.path %></a>
+          <% }) %>
+        </div>
+      <% }) %>
+    </aside>
+    <div class="fa-source-code">
+      <% if (file) { %>
+        <div class="fa-source-toolbar">
+          <strong><%= file %></strong>
+          <a href="/source/raw?f=<%= encodeURIComponent(file) %>" target="_blank" rel="noopener">纯文本</a>
+        </div>
+        <pre class="fa-code"><code><%= content %></code></pre>
+      <% } else { %>
+        <div class="fa-empty">从左侧选择文件查看。不含 node_modules、数据库、图片二进制与 .env。</div>
+      <% } %>
+    </div>
+  </div>
+</section>

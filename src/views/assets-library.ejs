@@ -1,0 +1,26 @@
+<div class="fa-library-head">
+  <div>
+    <h1 class="fa-pixel-ornament">像素素材库</h1>
+    <p class="fa-muted">人物 · 树木 · 花草 · 水果 · 美食 · 场景 — PPT / 海报构建时按主题自动拼贴</p>
+  </div>
+  <a class="fa-btn fa-btn-ghost" href="/projects/new">用素材做项目</a>
+</div>
+
+<div class="fa-cat-tabs">
+  <a class="fa-cat-tab <%= !category || category === 'all' ? 'active' : '' %>" href="/assets-library">全部 (<%= total %>)</a>
+  <% categories.forEach(function(c) { %>
+    <a class="fa-cat-tab <%= category === c.key ? 'active' : '' %>" href="/assets-library?cat=<%= c.key %>">
+      <%= c.label %> (<%= c.count %>)
+    </a>
+  <% }) %>
+</div>
+
+<div class="fa-asset-grid">
+  <% items.forEach(function(it) { %>
+    <article class="fa-asset-slot">
+      <img src="/assets/<%= it.file %>" alt="<%= it.name %>" width="96" height="96" loading="lazy"/>
+      <div class="name"><%= it.name %></div>
+      <div class="tags"><%= (it.tags || []).slice(0, 4).join(' · ') %></div>
+    </article>
+  <% }) %>
+</div>

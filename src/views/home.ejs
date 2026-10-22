@@ -1,0 +1,47 @@
+<section class="fa-hero">
+  <div class="fa-hero-glow"></div>
+  <p class="fa-eyebrow">PIXEL MULTI-AGENT STUDIO</p>
+  <h1>用自然语言，把想法做成<strong>可上线产品</strong></h1>
+  <p class="fa-lead">ForgeAtoms 以星露谷般的像素工坊气质，驱动 Iris / Emma / Bob / Alex：调研 → 方案 → 架构 → 工程。支持网站、PPT、可玩小游戏，以及像素素材拼贴海报。</p>
+  <div class="fa-hero-actions">
+    <% if (currentUser) { %>
+      <a class="fa-btn" href="/dashboard">进入工作台</a>
+      <a class="fa-btn fa-btn-ghost" href="/assets-library">浏览素材库</a>
+    <% } else { %>
+      <a class="fa-btn" href="/register">免费开始</a>
+      <a class="fa-btn fa-btn-ghost" href="/login">已有账号登录</a>
+    <% } %>
+  </div>
+  <div class="fa-agent-row">
+    <div class="fa-agent-chip"><span>🔍</span> Iris 调研</div>
+    <div class="fa-agent-chip"><span>🧭</span> Emma 产品</div>
+    <div class="fa-agent-chip"><span>🏗️</span> Bob 架构</div>
+    <div class="fa-agent-chip"><span>⚙️</span> Alex 工程</div>
+  </div>
+</section>
+
+<section class="fa-section">
+  <h2>核心流程</h2>
+  <div class="fa-cards-3">
+    <article class="fa-card">
+      <div class="fa-step">01</div>
+      <h3>描述想法</h3>
+      <p>写下标题与想法。可指定网站、PPT、小游戏或像素海报。</p>
+    </article>
+    <article class="fa-card">
+      <div class="fa-step">02</div>
+      <h3>多智能体构建</h3>
+      <p>智能体协作输出方案；PPT/图片会从素材库按主题拼贴像素画面。</p>
+    </article>
+    <article class="fa-card">
+      <div class="fa-step">03</div>
+      <h3>预览 &amp; 导出</h3>
+      <p>在线预览、下载 PPTX / 海报，或导出 ZIP；小游戏可直接游玩。</p>
+    </article>
+  </div>
+</section>
+
+<section class="fa-section fa-section-muted">
+  <h2>Demo 账号</h2>
+  <p class="fa-muted">邮箱 <code>demo@forgeatoms.local</code> · 密码 <code>demo1234</code> · <a href="/assets-library">打开素材库</a></p>
+</section>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>ForgeAtoms</title>
+  <link rel="stylesheet" href="/css/app.css"/>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+</head>
+<body class="fa-body">
+  <header class="fa-topbar">
+    <a class="fa-brand" href="/">Forge<span>Atoms</span></a>
+    <nav class="fa-nav">
+      <a href="/assets-library">素材库</a>
+      <a href="/source">源代码</a>
+      <% if (currentUser) { %>
+        <a href="/dashboard">工作台</a>
+        <a href="/projects/new" class="fa-btn fa-btn-sm">新建项目</a>
+        <form method="post" action="/logout" class="fa-inline">
+          <button type="submit" class="fa-linkbtn"><%= currentUser.name || currentUser.email %> · 退出</button>
+        </form>
+      <% } else { %>
+        <a href="/login">登录</a>
+        <a href="/register" class="fa-btn fa-btn-sm">注册</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="fa-main">
+    <%- body %>
+  </main>
+  <footer class="fa-footer">
+    <span>ForgeAtoms · 像素风 AI 多智能体工坊</span>
+    <span>灵感：atoms.dev × 星露谷物语</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<div class="fa-auth">
+  <h1>注册</h1>
+  <p class="fa-muted">创建账号，开始用多智能体打造产品</p>
+  <% if (error) { %><div class="fa-alert"><%= error %></div><% } %>
+  <form method="post" action="/register" class="fa-form">
+    <label>昵称
+      <input type="text" name="name" value="<%= form.name || '' %>" placeholder="怎么称呼你"/>
+    </label>
+    <label>邮箱
+      <input type="email" name="email" required value="<%= form.email || '' %>" placeholder="you@example.com" autocomplete="username"/>
+    </label>
+    <label>密码
+      <input type="password" name="password" required minlength="6" placeholder="至少 6 位" autocomplete="new-password"/>
+    </label>
+    <button class="fa-btn fa-btn-block" type="submit">创建账号</button>
+  </form>
+  <p class="fa-muted fa-center">已有账号？ <a href="/login">登录</a></p>
+</div>
